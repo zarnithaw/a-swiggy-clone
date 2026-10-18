@@ -33,7 +33,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Trivy Image Scan
-        run: trivy image zarnithaw/swiggy-app > trivyimage.txt
+        run: trivy image zarnithaw/swiggy-app:main-${GITHUB_SHA::7} > trivyimage.txt
 
 
       
