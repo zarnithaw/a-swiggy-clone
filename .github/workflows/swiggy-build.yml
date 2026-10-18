@@ -32,8 +32,8 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-     - name: Trivy Image Scan
-       run: trivy image zarnithaw/swiggy-app > trivyimage.txt
+      - name: Trivy Image Scan
+        run: trivy image zarnithaw/swiggy-app > trivyimage.txt
 
 
       
