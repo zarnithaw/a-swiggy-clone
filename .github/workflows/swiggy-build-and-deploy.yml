@@ -35,7 +35,7 @@ jobs:
       - name: Trivy Image Scan
         run: trivy image zarnithaw/swiggy-app:main-${GITHUB_SHA::7} > trivyimage.txt
 
-    Deploy:
+  Deploy:
       needs: build-analyze-scan
       runs-on: [self-hosted]
       steps:
