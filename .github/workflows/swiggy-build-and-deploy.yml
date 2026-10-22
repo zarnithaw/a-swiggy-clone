@@ -7,7 +7,7 @@ on:
 
 
 jobs:
-  build:
+  build-analyze-scan:
     name: Build
     runs-on: [self-hosted]
     steps:
@@ -34,6 +34,16 @@ jobs:
 
       - name: Trivy Image Scan
         run: trivy image zarnithaw/swiggy-app:main-${GITHUB_SHA::7} > trivyimage.txt
+
+    Deploy:
+      needs: build-analyze-scan
+      runs-on: [self-hosted]
+      steps:
+      - name: Update kubeconfig
+        run: aws eks --region ap-southeast-1 update-kubeconfig --name virtualtechbox-cluster
+
+      - name: Deploy to Kubernetes
+        run: kubectl apply -f deployment-and-service.yml
 
       - name: Send a Slack Notification
         if: always()
