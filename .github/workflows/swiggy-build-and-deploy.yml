@@ -43,8 +43,9 @@ jobs:
         run: aws eks --region ap-southeast-1 update-kubeconfig --name virtualtechbox-cluster
 
       - name: Deploy to Kubernetes
-        run: kubectl apply -f deployment-and-service.yml
-
+        run:  |
+          kubectl apply -f Kubernetes/deployment.yml
+          kubectl apply -f Kubernetes/service.yml
       - name: Send a Slack Notification
         if: always()
         uses: act10ns/slack@v1
